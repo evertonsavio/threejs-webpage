@@ -126,6 +126,9 @@ const clock = new THREE.Clock()
 const tick = () => {
     const elapsedTime = clock.getElapsedTime()
 
+    // Animate camera
+    camera.position.y = - scrollY / sizes.height * objectsDistance
+
     //Animate Meshes
     for (const mesh of sectionMeshes) {
         mesh.rotation.x = elapsedTime * 0.1
