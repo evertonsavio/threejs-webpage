@@ -110,6 +110,14 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
+//Scroll
+let scrollY = window.scrollY
+
+window.addEventListener('scroll', () => {
+    scrollY = window.scrollY
+    console.log(scrollY)
+})
+
 /**
  * Animate
  */
@@ -121,6 +129,7 @@ const tick = () => {
     //Animate Meshes
     for (const mesh of sectionMeshes) {
         mesh.rotation.x = elapsedTime * 0.1
+        mesh.rotation.y = elapsedTime * 0.12
     }
 
     // Render
