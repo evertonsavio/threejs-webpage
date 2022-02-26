@@ -147,10 +147,17 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 //Scroll
 let scrollY = window.scrollY
+let currentSection = 0
 
 window.addEventListener('scroll', () => {
     scrollY = window.scrollY
-    console.log(scrollY)
+    console.log(Math.round(scrollY / sizes.height))
+
+    const newSection = Math.round(scrollY / sizes.height)
+    if (currentSection !== newSection) {
+        currentSection = newSection
+        console.log('Changed Section', currentSection)
+    }
 })
 
 //Cursor
@@ -161,8 +168,6 @@ cursor.y = 0;
 window.addEventListener('mousemove', (event) => {
     cursor.x = (event.clientX / sizes.width) - 0.5;
     cursor.y = (event.clientY / sizes.height) - 0.5;
-
-    console.log(cursor)
 });
 
 /**
@@ -184,6 +189,7 @@ const tick = () => {
 
     cameraGroup.position.x = paralaxX - cameraGroup.position.x * 5 * deltaTime
     cameraGroup.position.y = paralaxY - cameraGroup.position.y * 5 * deltaTime
+    cameraGroup.position.z = paralaxY - cameraGroup.position.y * 5 * deltaTime
     //Animate Meshes
     for (const mesh of sectionMeshes) {
         mesh.rotation.x = elapsedTime * 0.1
